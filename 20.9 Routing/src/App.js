@@ -1,26 +1,26 @@
-import AllQuotes from "./pages/AllQuotes";
-import NewQuote from "./pages/NewQuote";
-import QuoteDetails from "./pages/QuoteDetails";
+import { Route, Switch, Redirect } from 'react-router-dom';
 
-import { Route, Switch, Redirect } from "react-router-dom";
-import Layout from "./components/layout/Layout";
-import NotFound from "./pages/NotFound";
+import AllQuotes from './pages/AllQuotes';
+import QuoteDetail from './pages/QuoteDetail';
+import NewQuote from './pages/NewQuote';
+import NotFound from './pages/NotFound';
+import Layout from './components/layout/Layout';
 
 function App() {
   return (
     <Layout>
       <Switch>
-        <Route path="/" exact>
-          <Redirect to="/quotes" />
+        <Route path='/' exact>
+          <Redirect to='/quotes' />
         </Route>
-        <Route path="/quotes" exact>
+        <Route path='/quotes' exact>
           <AllQuotes />
         </Route>
-        <Route path="/quotes/add-new" exact>
-          <NewQuote />
+        <Route path='/quotes/:quoteId'>
+          <QuoteDetail />
         </Route>
-        <Route path="/quotes/:quoteID">
-          <QuoteDetails />
+        <Route path='/new-quote'>
+          <NewQuote />
         </Route>
         <Route path='*'>
           <NotFound />
