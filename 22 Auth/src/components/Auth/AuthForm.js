@@ -31,7 +31,8 @@ const AuthForm = () => {
     let url;
     if (isLogin) {
       url =
-        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" + API;
+        "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=" +
+        API;
     } else {
       url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=" + API;
@@ -64,9 +65,9 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
-        authCtx.login(data.idToken);
-        history.replace('/');
-        
+        const expirationTime = new Date(new Date().getTime() + (+data.expiresIn * 1000));
+        authCtx.login(data.idToken, expirationTime.toISOString());
+        history.replace("/");
       })
       .catch((err) => {
         alert(err.message);
